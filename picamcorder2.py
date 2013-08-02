@@ -24,7 +24,7 @@ GPIO.setmode(GPIO.BCM)
 # Both ports are wired to connect to GND on button press.
 # So we'll be setting up falling edge detection for both
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # GPIO 24 set up as an input, pulled down, connected to 3V3 on button press
 GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -63,7 +63,6 @@ def start_recording(rec_num):
 # on long clips at max quality you may get dropouts
 # -w 1280 -h 720 -fps 25 -b 3000000 
 # seems to be low enough to avoid this 
-
 
 def stop_recording():
     global recording
@@ -123,7 +122,7 @@ print "it will connect GPIO port 23 (pin 16) to GND (pin 6)\n"
 print "You will also need a second button connected so that when pressed"
 print "it will connect GPIO port 24 (pin 18) to 3V3 (pin 1)\n"
 #print "You will also need a third button connected so that when pressed"
-#print "it will connect GPIO port 25 (pin 18) to GND\n"
+#print "it will connect GPIO port 25 (pin 22) to GND\n"
 
 # optional for when you're at the terminal
 #raw_input("Press Enter when ready\n>")
@@ -187,57 +186,4 @@ try:
 except KeyboardInterrupt:
     stop_recording()
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
-GPIO.cleanup()           # clean up GPIO on normal exit
-
-########################Possible Future Development#############
-
-# LED on the back to show recording --> DONE
-# camera LED toggle to disable front LED, maybe with an argv argument? --> DONE
-# leds flashing on program exit and shutdown --> DONE
-# indication of how much recording time/disk space left --> DONE
-# micro USB adaptor so Pi can be stood up at SD card end --> DONE
-# 52mm thread adaptor for adding lenses --> DONE
-
-# Stills button or button combo
-# need a mount for it
-# possibly pan and tilt
-# possibly a rotating base for all-round work - either stepper or highly geared
-
-######### it would be nice to have a third button for stills too
-######### getting errors after adding port 25 for stills
-
-# it seems that raspivid and raspistill don't play nicely together in the 
-# same script, so had to remove the stills option for now
-
-#def take_photo():
-#    call (["raspistill -t 3000 -o test-pic.jpg"], shell=True)
-
-
-#def my_callback(channel):
-#    global rec_num
-#    print "falling edge detected on 25"
-#    if recording == 1:
-#        stop_recording()
-#        take_photo()
-#        rec_num += 1
-#        start_recording(rec_num)
-#    else:
-#        take_photo()
-
-# Component list
-# 1 model A Raspberry Pi
-# 1 Raspberry Pi camera board
-# 1 switching regulator board ###link###
-# 1 Bluetooth serial adaptor ###link###
-# battery & connectors
-# female .1" pin headers
-# wire
-# 605 LED
-# 150R 1206
-# Cyntech case
-# White tack
-# hot glue gun
-# buttons ###link###
-# bit of stripboard
-# 4x2 angled header
 
