@@ -1,8 +1,15 @@
-This Readme will contain some basic info about the RasPiCamcorder 2
+This Readme contains basic info about the RasPiCamcorder 2
+by Alex Eames of RasPi.TV
 
-But I haven't written it all yet, so, for the time being, you can pop over
-to the http://RasPi.TV blog or YouTube and see some info about the project
-there...
+Basically there are three major parts...
+
+Video recording                         [sudo python picamcorder2.py]
+Stills capture (plus DropBox upload)    [sudo python picamstills-db.py]
+Video streaming                         [python picamstreamer.py]
+
+These are currently three separate programs. See below for details.
+
+Photos and further info on the http://RasPi.TV blog or YouTube...
 
 http://raspi.tv/?p=3424
 and
@@ -36,7 +43,10 @@ disable_camera_led=1
 
 Usage
 =====
-To run the program manually, you can type 
+
+Video
+-----
+To run the video program manually, you can type 
 
 sudo python picamcorder2.py
 
@@ -44,6 +54,37 @@ Add a 0 (zero) if you want to disable the front LED
 (assuming you have added the necessary tweak to your config file)
 
 sudo python picamcorder2.py 0
+
+Stills
+------
+To run the stills program manually, you can type 
+
+sudo python picamstills-db.py
+or
+sudo python picamstills-db.py 0 (if you want to disable the front LED)
+
+Video Streaming
+---------------
+This uses two scripts to separate the GPIO and non-GPIO parts since 
+VLC can't run as root, but RPi.GPIO has to run as root.
+
+To start the video streaming program (it works just as the recording program
+except it streams to port 8090 rather than recording) just type...
+
+python picamstreamer.py
+or
+python picamstreamer.py 0 (if you want to disable the front LED)
+
+This program handles the streaming part, but the GPIO part is handled by
+picamstream-sudo.py (which is called by picamstreamer.py).
+
+Then, on your receiving device, you need to have VLC running and looking at
+a network stream from...
+
+http://ip_address_of_your_pi:8090
+
+Further instructions about VLC streaming here
+http://raspi.tv/?p=3099
 
 
 Setting up your Pi
@@ -66,8 +107,11 @@ The bash script picamcorder.sh just contains this...
 sleep 10
 sudo python /home/pi/picamcorder2.py &
 
-...which slows things down enough to make it work and puts the process in the
-background.
+...which slows things down at startup, just enough to make it work and puts 
+the process in the background.
+
+If you prefer to auto-start-up the stills or streaming programs instead of 
+video, just edit picamcorder.sh to call the program you want to run.
 
 
 Setting up for small screen use
@@ -78,16 +122,16 @@ sudo dpkg-reconfigure console-setup
 lets you increase console font size for small screens
 
 
-Setting Up Dropbox upload for Stills mode
+Setting Up Dropbox Upload for Stills mode
 -----------------------------------------
-Not written instructions yet, but you can find it all here if you want to 
-go through it yourself. 
+Blog article here http://raspi.tv/?p=3572 shows full instructions on how to 
+set up DropBox Uploader on your Pi and basic usage.
 
+Full documentation at the author's GitHub
 https://github.com/andreafabrizi/Dropbox-Uploader
 
-It's not that hard. Only took me about 2 hours to
-do the dropbox integration (including coding). To set up as a user, should
-only take an hour or so.
+To set up as a user, should only take an hour or so. A lot less if you already
+have a DropBox account.
 
 
 ########################Possible Future Development#############
@@ -105,12 +149,13 @@ only take an hour or so.
 # possibly a rotating base for all-round work - either stepper or highly geared
 
 ######### it would be nice to have a third button for stills too
-######### getting errors after adding port 25 for stills
+######### but getting errors after adding port 25 for stills
 
 ## All parts referring to GPIO25 are commented out for now
 
 # it seems that raspivid and raspistill don't play nicely together in the 
-# same script, so had to remove the stills option for now
+# same script, so had to remove the stills option from the video script
+# and implement it separately
 
 #def take_photo():
 #    call (["raspistill -t 3000 -o test-pic.jpg"], shell=True)
