@@ -24,9 +24,19 @@ LEDs
 The camera LED is on GPIO 5. 
 I have an additional LED (I wanted one on the back) on GPIO 22
 
+Setting up camera led control (script may not work properly without this)
+-----------------------------
+
+sudo nano /boot/config.txt
+
+Add this line to your config.txt
+
+disable_camera_led=1
+
+
 Usage
 =====
-To run the program, you can type 
+To run the program manually, you can type 
 
 sudo python picamcorder2.py
 
@@ -39,8 +49,8 @@ sudo python picamcorder2.py 0
 Setting up your Pi
 ==================
 
-Setting up for auto start
--------------------------
+Setting up for auto start on boot
+---------------------------------
 Add this line to your /etc/rc.local
 
 /home/pi/picamcorder.sh
@@ -68,18 +78,16 @@ sudo dpkg-reconfigure console-setup
 lets you increase console font size for small screens
 
 
-Setting up camera led manual control
-------------------------------------
+Setting Up Dropbox upload for Stills mode
+-----------------------------------------
+Not written instructions yet, but you can find it all here if you want to 
+go through it yourself. 
 
-sudo nano /boot/config.txt
+https://github.com/andreafabrizi/Dropbox-Uploader
 
-Add this line to your config.txt
-
-disable_camera_led=1
-
-
-
-
+It's not that hard. Only took me about 2 hours to
+do the dropbox integration (including coding). To set up as a user, should
+only take an hour or so.
 
 
 ########################Possible Future Development#############
