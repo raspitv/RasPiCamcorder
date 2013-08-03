@@ -2,6 +2,7 @@
 # script by Alex Eames http://RasPi.tv
 import RPi.GPIO as GPIO
 import sys
+import os
 import time
 from time import sleep
 
@@ -65,6 +66,13 @@ def flash(interval,reps):
         GPIO.output(22, 0)
         sleep(interval)
 
+def shutdown():
+    print "shutting down now"
+    flash(0.05,50)
+    GPIO.cleanup()
+    os.system("sudo halt")
+    sys.exit()
+
 try:
     write_streaming_status(0)
 except:
@@ -112,7 +120,6 @@ try:
             if i >= 59:
                 shutdown()
 
-except KeyboardInterrupt:
-    stop_recording()
-    GPIO.cleanup()       # clean up GPIO on CTRL+C exit
-GPIO.cleanup()           # clean up GPIO on normal exit
+finally:
+    write_streaming_status(0)
+    GPIO.cleanup()       # clean up GPIO on exit
