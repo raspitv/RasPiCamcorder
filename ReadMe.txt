@@ -1,6 +1,19 @@
 This Readme contains basic info about the RasPiCamcorder 2
 by Alex Eames of RasPi.TV
 
+=============================
+Released under the Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+http://creativecommons.org/licenses/by/3.0/
+
+You may do whatever your like with this software. If you release a derivative
+it must contain at or near the top of the documentation...
+
+"Based on RasPiCamcorder scripts by Alex Eames of http://RasPi.TV/
+https://github.com/raspitv/RasPiCamcorder/"
+
+That is your ONLY obligation.
+=============================
+
 Basically there are three major parts...
 
 Video recording                         [sudo python picamcorder2.py]
