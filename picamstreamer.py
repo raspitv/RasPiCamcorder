@@ -30,7 +30,7 @@ def stream_video():
 def stop_stream():
     print "stopping streaming"
     call (["pkill raspivid"], shell=True)
-    call (["pkill cvlc"], shell=True)
+    call (["pkill vlc"], shell=True)
 
 def check_streaming_status():
 # read file streaming_file, make into int() set streaming_on equal to it
