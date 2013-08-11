@@ -121,5 +121,5 @@ try:
                 shutdown()
 
 finally:
-    write_streaming_status(0)
+    write_streaming_status(2)
     GPIO.cleanup()       # clean up GPIO on exit
